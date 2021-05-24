@@ -1,4 +1,8 @@
 package com.postService.post.service;
 
-public class PostService {
+import com.postService.post.entities.Comment;
+
+public interface PostService {
+
+    public void setComment(Comment comment);
 }

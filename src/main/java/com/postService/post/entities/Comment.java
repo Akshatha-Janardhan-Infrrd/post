@@ -9,6 +9,7 @@ public class Comment {
     private String commentId;
     private String comment;
     private String userId;
+    private String postId;
 
     public Comment() {
     }
@@ -19,13 +20,19 @@ public class Comment {
         this.userId = userId;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "commentId='" + commentId + '\'' +
-                ", comment='" + comment + '\'' +
-                ", userId='" + userId + '\'' +
-                '}';
+    public Comment(String commentId, String comment, String userId, String postId) {
+        this.commentId = commentId;
+        this.comment = comment;
+        this.userId = userId;
+        this.postId = postId;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     public String getCommentId() {
@@ -50,5 +57,15 @@ public class Comment {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId='" + commentId + '\'' +
+                ", comment='" + comment + '\'' +
+                ", userId='" + userId + '\'' +
+                ", postId='" + postId + '\'' +
+                '}';
     }
 }
