@@ -26,11 +26,19 @@ public class CommentController {
     private PostService postService;
 
     @PostMapping("/add")
-    public ResponseEntity<Response> updateBio(HttpServletRequest httpServletRequest, @RequestBody CommentVO comment){
+    public ResponseEntity<Response> addComment(HttpServletRequest httpServletRequest, @RequestBody CommentVO comment){
         String userId=fetcher.getUserId(httpServletRequest);
         Comment newComment =commentService.addComment(userId,comment.getComment(),comment.getPostId());
         postService.setComment(newComment);
         Response<String> apiResponse = new Response<>("Success", HttpStatus.OK.value(), "comment has been added to the post");
+        return new ResponseEntity<Response>(apiResponse, HttpStatus.OK);
+
+    }
+
+    @PutMapping("/edit/{commentId}/{comment}")
+    public ResponseEntity<Response> updateComment( @PathVariable String commentId,@PathVariable String comment){
+        commentService.editComment(commentId,comment);
+        Response<String> apiResponse = new Response<>("Success", HttpStatus.OK.value(), "comment has been edited");
         return new ResponseEntity<Response>(apiResponse, HttpStatus.OK);
 
     }
