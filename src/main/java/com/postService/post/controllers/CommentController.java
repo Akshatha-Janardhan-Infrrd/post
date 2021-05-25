@@ -30,7 +30,7 @@ public class CommentController {
         String userId=fetcher.getUserId(httpServletRequest);
         Comment newComment =commentService.addComment(userId,comment.getComment(),comment.getPostId());
         postService.setComment(newComment);
-        Response<String> apiResponse = new Response<>("Success", HttpStatus.OK.value(), "comment has been added to the post");
+        Response<String> apiResponse = new Response<>("Success", HttpStatus.CREATED.value(), "comment has been added to the post");
         return new ResponseEntity<Response>(apiResponse, HttpStatus.OK);
 
     }
