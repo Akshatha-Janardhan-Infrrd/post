@@ -4,12 +4,14 @@ import com.postService.post.entities.Post;
 import com.postService.post.payload.CreatePostResponse;
 import com.postService.post.payload.DeletePostResponse;
 import com.postService.post.repositories.PostRepository;
+import com.postService.post.service.MediaUploadService;
 import com.postService.post.service.PostServiceImpl;
 import com.postService.post.utils.UserIdFetcher;
 import com.postService.post.vos.PostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,11 +28,21 @@ public class PostController {
     @Autowired
     private UserIdFetcher userIdFetcher;
 
+    @Autowired
+    private MediaUploadService mediaUpload;
+
     @PostMapping("/create")
     public ResponseEntity<CreatePostResponse> createPost(HttpServletRequest httpServletRequest, @RequestBody PostVo post){
         String userId = userIdFetcher.getUserId(httpServletRequest);
         Post newPost = postService.createPost(userId,post.getContent(),post.getDescription());
         return ResponseEntity.ok(new CreatePostResponse("Post successful",200,post));
+    }
+
+    @PostMapping("/upload/{desc}")
+    public ResponseEntity<CreatePostResponse> uploadMedia(HttpServletRequest httpServletRequest, @RequestBody MultipartFile file, @PathVariable("desc") String description){
+        String userId = userIdFetcher.getUserId(httpServletRequest);
+        String newPost = mediaUpload.uploadFile(file,userId,description);
+        return ResponseEntity.ok(new CreatePostResponse("Post successful",200,newPost));
     }
 
     @DeleteMapping("/delete/{id}")

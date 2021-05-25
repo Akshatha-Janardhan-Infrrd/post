@@ -22,6 +22,7 @@ public class PostServiceImpl implements PostService{
         post.setAuthorId(userId);
         post.setContent(content);
         post.setDescription(description);
+        post.setDate(System.currentTimeMillis());
         postRepository.save(post);
         return post;
     }

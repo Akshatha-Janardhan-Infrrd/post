@@ -17,7 +17,7 @@ public class Post {
     private String authorId;
     @DBRef
     private List<Comment> comments;
-    private Date date;
+    private long date;
 
     public Post() {
     }
@@ -27,7 +27,7 @@ public class Post {
         this.description = description;
     }
 
-    public Post(String id, String content, String description, int noOfViews, int likes, String authorId, List<Comment> comments, Date date) {
+    public Post(String id, String content, String description, int noOfViews, int likes, String authorId, List<Comment> comments, long date) {
         this.id = id;
         this.content = content;
         this.description = description;
@@ -94,11 +94,11 @@ public class Post {
         this.comments = comments;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

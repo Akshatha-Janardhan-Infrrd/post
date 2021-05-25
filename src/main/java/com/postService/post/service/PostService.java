@@ -1,7 +1,7 @@
 package com.postService.post.service;
 
 import com.postService.post.entities.Post;
-import com.postService.post.vos.PostVo;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface PostService {
 
