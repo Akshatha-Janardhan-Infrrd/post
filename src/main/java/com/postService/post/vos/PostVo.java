@@ -1,4 +1,4 @@
-package com.postService.post.vos;
+package com.postService.post.VOs;
 
 public class PostVo {
     private String content;
