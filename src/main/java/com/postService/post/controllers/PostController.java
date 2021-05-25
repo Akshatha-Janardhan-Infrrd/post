@@ -2,23 +2,29 @@ package com.postService.post.controllers;
 
 import com.postService.post.VOs.PostAndUser;
 import com.postService.post.VOs.UserVO;
+import com.postService.post.VOs.PostVo;
 import com.postService.post.clients.FeignClientProfile;
 import com.postService.post.entities.Post;
+import com.postService.post.payload.CreatePostResponse;
+import com.postService.post.payload.DeletePostResponse;
+import com.postService.post.service.MediaUploadService;
 import com.postService.post.service.PostService;
+import com.postService.post.service.PostServiceImpl;
 import com.postService.post.utils.Response;
+import com.postService.post.utils.UserIdFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 @RestController
 @RequestMapping("/post")
 public class PostController {
 
-    @Autowired
-    private PostRepository postRepository;
 
     @Autowired
     private PostServiceImpl postService;
@@ -28,6 +34,9 @@ public class PostController {
 
     @Autowired
     private MediaUploadService mediaUpload;
+
+    @Autowired
+    private FeignClientProfile clientProfile;
 
     @PostMapping("/create")
     public ResponseEntity<CreatePostResponse> createPost(HttpServletRequest httpServletRequest, @RequestBody PostVo post){
@@ -61,12 +70,6 @@ public class PostController {
         return  ResponseEntity.ok(new CreatePostResponse("Post liked",200,posId));
     }
 
-
-    @Autowired
-    private PostService postService;
-
-    @Autowired
-    private FeignClientProfile clientProfile;
 
     @GetMapping("/{postId}")
     public ResponseEntity<Response>getPost(@PathVariable String postId){
