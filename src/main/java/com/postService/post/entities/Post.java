@@ -22,6 +22,11 @@ public class Post {
     public Post() {
     }
 
+    public Post(String content, String description) {
+        this.content = content;
+        this.description = description;
+    }
+
     public Post(String id, String content, String description, int noOfViews, int likes, String authorId, List<Comment> comments, Date date) {
         this.id = id;
         this.content = content;

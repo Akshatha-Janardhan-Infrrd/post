@@ -15,7 +15,6 @@ public class UserIdFetcher {
         String secret="taeganger";
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);
-
             try {
                 Claims body = Jwts.parser()
                         .setSigningKey(secret)
