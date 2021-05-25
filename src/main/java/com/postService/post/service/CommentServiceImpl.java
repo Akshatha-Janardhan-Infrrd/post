@@ -38,7 +38,8 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.existsById(commentId);
     }
 
-    private Comment getComment(String commentId){
+    @Override
+    public Comment getComment(String commentId){
         Optional<Comment> comment= commentRepository.findById(commentId);
         return comment.get();
     }

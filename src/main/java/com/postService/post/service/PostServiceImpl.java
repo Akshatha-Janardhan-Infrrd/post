@@ -22,4 +22,10 @@ public class PostServiceImpl implements PostService{
      post.setComments(commentList);
      postRepository.save(post);
     }
+
+    @Override
+    public Post getPost(String postId) {
+        Optional<Post> post=postRepository.findById(postId);
+        return post.get();
+    }
 }

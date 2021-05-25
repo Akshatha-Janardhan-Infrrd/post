@@ -9,4 +9,5 @@ public interface CommentService {
     public Comment addComment(String userId, String comment,String postId);
     public void editComment(String commentId,String comment);
     public void deleteComment(String commentId);
+    public Comment getComment(String commentId);
 }

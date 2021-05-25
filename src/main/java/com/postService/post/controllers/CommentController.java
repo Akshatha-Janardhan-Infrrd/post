@@ -42,5 +42,12 @@ public class CommentController {
         return new ResponseEntity<Response>(apiResponse, HttpStatus.OK);
 
     }
+    @GetMapping("/{commentId}")
+    public ResponseEntity<Response> getComment( @PathVariable String commentId){
+        Comment comment=commentService.getComment(commentId);
+        Response<Comment> apiResponse = new Response<>("Success", HttpStatus.OK.value(), comment);
+        return new ResponseEntity<Response>(apiResponse, HttpStatus.OK);
+
+    }
 
 }
