@@ -1,5 +1,7 @@
 package com.postService.post.controllers;
 
+import com.postService.post.VOs.UserVO;
+import com.postService.post.VOs.UserWithPost;
 import com.postService.post.clients.FeignClientProfile;
 import com.postService.post.entities.Post;
 import com.postService.post.service.PostService;
@@ -29,7 +31,11 @@ public class SearchController {
         ResponseEntity<Response> clientResponse = clientProfile.getProfileFromName(name);
         HashMap map = (HashMap) clientResponse.getBody().getData();
         String authorId = (String)map.get("userId");
+        UserVO user=new UserVO((String) map.get("userId"),(String) map.get("name"),(String) map.get("image"));
         Post post = postService.getPostFromUser(authorId);
-        return ResponseEntity.ok(new Response("Search successful",200,clientResponse+post.getId()+post.getNoOfViews()));
+        UserWithPost userWithPost=new UserWithPost();
+        userWithPost.setPost(post);
+        userWithPost.setUser(user);
+        return ResponseEntity.ok(new Response("Search successful",200,userWithPost));
     }
 }
