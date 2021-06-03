@@ -73,4 +73,11 @@ public class PostServiceImpl implements PostService{
         Optional<Post> post=postRepository.findById(postId);
         return post.get();
     }
+
+    @Override
+    public Post getPostFromUser(String userId) {
+        List<Post> post = postRepository.findByAuthorId(userId);
+        return post.get(0);
+
+    }
 }

@@ -52,6 +52,7 @@ public class MediaUploadService {
         post.setAuthorId(userId);
         post.setContent(media);
         post.setDescription(description);
+        post.setDate(System.currentTimeMillis());
         postRepository.save(post);
     }
 }

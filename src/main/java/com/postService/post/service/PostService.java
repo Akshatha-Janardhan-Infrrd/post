@@ -12,4 +12,5 @@ public interface PostService {
     public void likePost(String postId);
     public void setComment(Comment comment);
     public Post getPost(String postId);
+    public Post getPostFromUser(String userId);
 }
